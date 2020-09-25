@@ -23,8 +23,8 @@ export class GetAPIService {
       map(actions => {
         return actions.map(a => {
           return{
-            cases: a.Cases,
-            day: i++
+            x: i++,
+            y: a.Cases
           }
         })
       })

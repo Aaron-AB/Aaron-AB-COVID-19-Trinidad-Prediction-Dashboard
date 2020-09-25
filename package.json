@@ -22,8 +22,10 @@
     "@tensorflow/tfjs": "^2.4.0",
     "@tensorflow/tfjs-vis": "^1.4.3",
     "@types/webgl2": "0.0.5",
+    "core-js": "^3.6.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "vega-embed": "^6.12.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

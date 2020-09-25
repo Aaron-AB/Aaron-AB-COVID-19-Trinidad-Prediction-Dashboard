@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+
 @Injectable({
   providedIn: 'root'
 })
-export class GraphingService {
+export class LinearRegService {
 
   constructor() { }
 }

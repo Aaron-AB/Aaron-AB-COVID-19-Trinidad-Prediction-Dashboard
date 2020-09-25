@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GraphingService } from './graphing.service';
+import { LinearRegService } from './linear-reg.service';
 
-describe('GraphingService', () => {
-  let service: GraphingService;
+describe('LinearRegService', () => {
+  let service: LinearRegService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(GraphingService);
+    service = TestBed.inject(LinearRegService);
   });
 
   it('should be created', () => {
