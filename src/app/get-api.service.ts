@@ -8,12 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class GetAPIService {
 
+  activeCases = 'https://api.covid19api.com/live/country/trinidad-and-tobago/status/confirmed';
+  numCases = 'https://api.covid19api.com/dayone/country/trinidad-and-tobago/status/confirmed/live';
   constructor(
     private http:HttpClient
   ) { }
 
   apiCall() {
-    return this.http.get<any>('https://api.covid19api.com/dayone/country/trinidad-and-tobago/status/confirmed/live');
+    return this.http.get<any>(this.numCases);
   }
 
 
@@ -24,48 +26,10 @@ export class GetAPIService {
         return actions.map(a => {
           return{
             x: i++,
-            y: a.Cases
+            y: a.Cases//change back to Cases
           }
         })
       })
     )
   }
-
-
-/*
-  pipeVals() {
-    let cords = new Observable<any>();
-    let values = new Observable<any>();
-    let i = 1;
-
-    cords = this.apiCall().pipe(
-      map(actions => {
-        return actions.map(a => {
-          return{
-            cases: a.Cases,
-            day: i++
-          }
-        })
-      })
-    )
-
-    cords.subscribe(res => {
-      values = res;
-    })
-    return values;
-  }*/
-
-
-  /*
-  subscribeVals() {
-    let mapped = [];
-    this.pipeVals().subscribe(res => {
-      mapped = res;
-      console.log(mapped);
-      //return mapped;
-    })
-
-
-    //return mapped;
-  }*/
 }

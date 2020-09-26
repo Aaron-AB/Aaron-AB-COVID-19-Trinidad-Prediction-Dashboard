@@ -5,8 +5,6 @@ import * as tf from '@tensorflow/tfjs';
   providedIn: 'root'
 })
 export class ExponentialRegService {
-  xs = [];
-  ys = [];
 
   constructor() {
    }
@@ -19,11 +17,14 @@ export class ExponentialRegService {
   learningRate = 0.01;
   optimizer = tf.train.adam(this.learningRate);
 
-  passValues(xs, ys) {
-    console.log(xs, ys);
+  async passValues(xs, ys) {
+    //console.log(xs, ys);
+
     let xts = this.createXTensors(xs);
     let yts = this.createYTensors(ys);
-    this.train(xts, yts, this.epochs);
+    await this.train(xts, yts, this.epochs);
+    let predVal = this.predict(xts);
+    return {xts, yts, predVal}
   }
 
   createXTensors(xs) {
@@ -50,14 +51,14 @@ export class ExponentialRegService {
     return preds.sub(ys).square().mean();
   }
 
-  train(xs, ys, epochs) {
+  async train(xs, ys, epochs) {
     for(let i=0; i<epochs; i++){
       this.optimizer.minimize(() => {
         const pred = this.predict(xs);
-        console.log(this.loss(pred,ys).dataSync());
+        //console.log(this.loss(pred,ys).dataSync());
         return this.loss(pred, ys);
       })
-      console.log(`Epoch #{i} a: ${this.a.dataSync()[0]}, b: ${this.b.dataSync()[0]}, c: ${this.c.dataSync()[0]}`)
+      //console.log(`Epoch #{i} a: ${this.a.dataSync()[0]}, b: ${this.b.dataSync()[0]}, c: ${this.c.dataSync()[0]}`)
     }
   }
 

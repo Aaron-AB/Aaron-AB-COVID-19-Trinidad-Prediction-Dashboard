@@ -16,8 +16,22 @@ export class GraphsService {
     });
   }
 
-  async plotExp() {
+  async plotTrained(xs, ys, predictionsAfter) {
+    let xvals = await xs.data();
+    let yvals = await ys.data();
+    let pred = await predictionsAfter.data();
+    //console.log(xvals, yvals, pred);
+    //ABOVE WORKS
+    let mapped = this.mapVals(xvals, yvals, pred);
+    //console.log(mapped);
 
+  }
+
+  mapVals(xs, ys, pred) {
+    let values = Array.from(ys).map((y, i) => {
+      console.log({'x': xs[i], 'y': ys[i], pred: pred[i]});
+      return {'x': xs[i], 'y': ys[i], pred: pred[i]};
+    });
   }
 
 }
