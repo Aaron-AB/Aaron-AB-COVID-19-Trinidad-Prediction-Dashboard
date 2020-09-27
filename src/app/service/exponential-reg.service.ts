@@ -13,7 +13,7 @@ export class ExponentialRegService {
   b = tf.variable(tf.scalar(Math.random()));
   c = tf.variable(tf.scalar(Math.random()));
 
-  epochs: number = 1500;
+  epochs: number = 150;
   learningRate = 0.01;
   optimizer = tf.train.adam(this.learningRate);
 
