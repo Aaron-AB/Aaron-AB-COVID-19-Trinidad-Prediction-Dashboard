@@ -18,20 +18,20 @@ export class GraphsService {
     });
   }
 
-  async plotTrained(xs, ys, predictionsAfter) {
+  async plotTrained(graphcontainer, xs, ys, predictionsAfter) {
     let xvals = await xs.data();
     let yvals = await ys.data();
     let predVals = await predictionsAfter.data();
     //console.log(xvals, yvals, pred);
     //ABOVE WORKS
     let values = this.mapVals(xvals, yvals, predVals);
-    console.log(values);
+    //console.log(values);
     //ABOVE WORKS
     //console.log()
 
 
     const spec = {
-      '$schema': 'https://vega.github.io/schema/vega-lite/v4.16.7.json',
+      '$schema': 'https://vega.github.io/schema/vega-lite/v4.13.1.json',
       'width': 300,
       'height': 300,
       'data': {'values': values},
@@ -54,9 +54,7 @@ export class GraphsService {
       ]
     };
 
-    return renderChart(document.getElementById('container2'), spec, {actions: false});
-    //tfvis.render.linechart(document.getElementById('container'), spec, {actions: false});
-
+    return renderChart(document.getElementById(graphcontainer), spec, {actions: false});
   }
 
   mapVals(xs, ys, pred) {

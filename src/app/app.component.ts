@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(){
     this.api.pipeVals().subscribe(res =>{
       this.mapped = res;
-      console.log(this.mapped);
+      //console.log(this.mapped);
 
 
 
@@ -59,9 +59,12 @@ export class AppComponent implements OnInit, OnDestroy {
     //console.log(this.tens.passValues(xs,ys));
     let newObj = await this.tens.passValues(xs, ys);
     //console.log(newObj);
+    //console.log(newObj.predValBefore.data())
+    //await this.graph.untrained(newObj.xts, newObj.yts, newObj.predValBefore);
 
-
-    await this.graph.plotTrained(newObj.xts, newObj.yts, newObj.predVal);
+    await this.graph.plotTrained('untrained', newObj.xts, newObj.yts, newObj.predValBefore);
+    console.log(newObj.predVal.data())
+    await this.graph.plotTrained('trained', newObj.xts, newObj.yts, newObj.predVal);
     //ABOVE WORKS
     /*
     let nxs = newObj.xts;

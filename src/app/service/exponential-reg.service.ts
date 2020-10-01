@@ -12,9 +12,10 @@ export class ExponentialRegService {
   a = tf.variable(tf.scalar(Math.random()));
   b = tf.variable(tf.scalar(Math.random()));
   c = tf.variable(tf.scalar(Math.random()));
+  d = tf.variable(tf.scalar(Math.random()));
 
-  epochs: number = 150;
-  learningRate = 0.01;
+  epochs: number = 400;
+  learningRate = 0.001;
   optimizer = tf.train.adam(this.learningRate);
 
   async passValues(xs, ys) {
@@ -22,9 +23,10 @@ export class ExponentialRegService {
 
     let xts = this.createXTensors(xs);
     let yts = this.createYTensors(ys);
+    let predValBefore = this.predict(xts);
     await this.train(xts, yts, this.epochs);
     let predVal = this.predict(xts);
-    return {xts, yts, predVal}
+    return {xts, yts, predVal, predValBefore}
   }
 
   createXTensors(xs) {
@@ -38,12 +40,15 @@ export class ExponentialRegService {
     let max = yTensors.max();
     let range = max.sub(min);
     let yTensorsNorm = yTensors.sub(min).div(range);
-    return yTensorsNorm;
+
+    //return yTensorsNorm;
+    return yTensors;
   }
 
   predict(x) {
     return tf.tidy(() => {
-      return this.a.mul(x.square()).add(this.b.mul(x)).add(this.c)
+      //return this.a.mul(x.square()).add(this.b.mul(x)).add(this.c)
+      return this.a.mul(x.pow(tf.scalar(3, 'int32'))).add(this.b.mul(x.square())).add(this.c.mul(x)).add(this.d);
     });
   }
 
